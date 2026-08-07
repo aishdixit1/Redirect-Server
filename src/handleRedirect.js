@@ -7,7 +7,9 @@ export function handleRedirect(req, res) {
   const { redirectLink, broadcast_id, contact_id, button_text } = req.query;
 
   const fallbackUrl = process.env.DEFAULT_FALLBACK_URL;
+
   const isRedirectLinkValid = isValidHttpUrl(redirectLink);
+
   const targetUrl = isRedirectLinkValid ? redirectLink : fallbackUrl;
 
   if (!isRedirectLinkValid) {
@@ -18,6 +20,7 @@ export function handleRedirect(req, res) {
     }
   }
 
+  // Track the click in the background without blocking the response
   trackClickInBackground({
     broadcastId: broadcast_id,
     contactId: contact_id,
