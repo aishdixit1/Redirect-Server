@@ -1,4 +1,4 @@
-import { pool } from '../config/db.js';
+import { db } from '../config/db.js';
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function trackClickInBackground({ broadcastId, contactId, buttonText }) {
@@ -8,7 +8,7 @@ export async function trackClickInBackground({ broadcastId, contactId, buttonTex
     return;
   }
 
-  const client = await pool.connect();
+  const client = await db.getClient();
   
   try {
     await client.query('BEGIN');
