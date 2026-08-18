@@ -12,13 +12,14 @@ This project exposes a single redirect endpoint that validates an incoming URL, 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
 | `redirectLink` | No | string | Target destination URL to redirect the user to. Must be a valid `http` or `https` URL. |
-| `broadcast_id` | No | UUID string | Broadcast identifier used for tracking the click. |
-| `contact_id` | No | UUID string | Contact identifier used for tracking the click. |
+| `data` | No | string | Formatted string containing `${broadcastId}_${contactId}` or `{${broadcastId}_${contactId}}`. |
 | `button_text` | No | string | Text of the clicked button, used for logging. |
+| `broadcast_id` | No | UUID string | (Fallback) Broadcast identifier used for tracking the click if `data` is missing. |
+| `contact_id` | No | UUID string | (Fallback) Contact identifier used for tracking the click if `data` is missing. |
 
 ### API Input Example
 ```text
-/r?redirectLink=https%3A%2F%2Fexample.com&broadcast_id=11111111-1111-1111-1111-111111111111&contact_id=22222222-2222-2222-2222-222222222222&button_text=Shop%20Now
+/r?redirectLink=https%3A%2F%2F5g0mwy-zq.myshopify.com&button_text=Shop%20Now&data={11111111-1111-1111-1111-111111111111_22222222-2222-2222-2222-222222222222}
 ```
 
 ### API Expected Return
